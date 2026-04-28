@@ -82,6 +82,7 @@ export function SortSheet({ onClose, onApply, currentSort }: Props) {
                   <div
                     onClick={(e) => {
                       e.stopPropagation();
+                      setSelected("price");
                       setPriceDir(prev => prev === "cheapest" ? "highest" : "cheapest");
                     }}
                     className="flex items-center gap-[4px] cursor-pointer"
@@ -89,7 +90,7 @@ export function SortSheet({ onClose, onApply, currentSort }: Props) {
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#1576db", fontWeight: 600 }}>
                       {priceDir === "cheapest" ? "Cheapest" : "Highest"}
                     </span>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ transform: "rotate(180deg)" }}>
                       {priceDir === "cheapest" ? (
                         <path d="M5 8L5 2M5 2L2 5M5 2L8 5" stroke="#1576db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       ) : (
@@ -104,6 +105,7 @@ export function SortSheet({ onClose, onApply, currentSort }: Props) {
                   <div
                     onClick={(e) => {
                       e.stopPropagation();
+                      setSelected("cover");
                       setCoverDir(prev => prev === "minCover" ? "maxCover" : "minCover");
                     }}
                     className="flex items-center gap-[4px] cursor-pointer"
@@ -111,7 +113,7 @@ export function SortSheet({ onClose, onApply, currentSort }: Props) {
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#1576db", fontWeight: 600 }}>
                       {coverDir === "minCover" ? "Min Cover" : "Max Cover"}
                     </span>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ transform: "rotate(180deg)" }}>
                       {coverDir === "minCover" ? (
                         <path d="M5 8L5 2M5 2L2 5M5 2L8 5" stroke="#1576db" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       ) : (
