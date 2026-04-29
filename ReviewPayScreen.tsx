@@ -1345,6 +1345,7 @@ export function ReviewPayScreen({ planId, onBack }: Props) {
 
       {/* ── Bottom Bar ──────────────────────────────────────────── */}
       <div
+        className="absolute bottom-0 left-0 right-0 z-20 rounded-tl"
         style={{
           flexShrink: 0,
           boxShadow: "0px 0px 11px 0px rgba(0,0,0,0.12)",
