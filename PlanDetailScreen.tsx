@@ -479,8 +479,8 @@ export function PlanDetailScreen({ planId, onBack, onReviewPay }: Props) {
             <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 14, color: "#282828", lineHeight: "20px" }}>
               {plan.name}
             </p>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#7e7e7e", lineHeight: "14px" }}>
-              {plan.planType} · ₹{plan.idv}
+            <p className="font-normal" style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#7e7e7e", lineHeight: "14px" }}>
+              {plan.planType} · {plan.idv}
             </p>
           </div>
         </div>
@@ -1326,9 +1326,7 @@ export function PlanDetailScreen({ planId, onBack, onReviewPay }: Props) {
                       <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#7e7e7e", lineHeight: "14px", marginTop: 2 }}>
                         {garage.address}
                       </p>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#7e7e7e", lineHeight: "14px" }}>
-                        {garage.distance} away
-                      </p>
+                      
                     </div>
                     {garage.badge && (
                       <span
@@ -1455,8 +1453,8 @@ export function PlanDetailScreen({ planId, onBack, onReviewPay }: Props) {
             onClick={onReviewPay}
             style={{
               height: 52,
-              paddingLeft: 40,
-              paddingRight: 40,
+              paddingLeft: 56,
+              paddingRight: 56,
               borderRadius: 40,
               background: "#004299",
               border: "none",
