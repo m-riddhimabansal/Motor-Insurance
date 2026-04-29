@@ -55,43 +55,52 @@ function DualRangeSlider({
   const lowPct = getPercent(low);
   const highPct = getPercent(high);
 
+  const clamp = (val: number, lo: number, hi: number) =>
+    Math.round(Math.max(lo, Math.min(hi, val)) * 10) / 10;
+
   const computeValue = (clientX: number) => {
-    if (!trackRef.current) return 0;
+    if (!trackRef.current) return min;
     const rect = trackRef.current.getBoundingClientRect();
     const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const { min: mn, max: mx } = stateRef.current;
-    return Math.round(mn + pct * (mx - mn));
+    return Math.round((mn + pct * (mx - mn)) * 10) / 10;
   };
 
   const startDrag = (which: "low" | "high") => (e: React.PointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
 
-    const move = (ev: PointerEvent) => {
-      const val = computeValue(ev.clientX);
-      const { low: curLow, high: curHigh, onChange: cb } = stateRef.current;
+    const onMove = (ev: PointerEvent) => {
+      const { low: curLow, high: curHigh, onChange: cb, min: mn, max: mx } = stateRef.current;
+      const raw = computeValue(ev.clientX);
       if (which === "low") {
-        cb(Math.min(val, curHigh - 1), curHigh);
+        const newLow = clamp(raw, mn, clamp(curHigh - 0.1, mn, mx));
+        cb(newLow, curHigh);
       } else {
-        cb(curLow, Math.max(val, curLow + 1));
+        const newHigh = clamp(raw, clamp(curLow + 0.1, mn, mx), mx);
+        cb(curLow, newHigh);
       }
     };
 
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
     };
 
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
   };
 
-  // Thumb handle — solid blue circle with two white drag lines (matching Figma)
+  // Clamp visual thumb position so it never bleeds outside the track ends
+  const thumbLeft = (pct: number) =>
+    `calc(${Math.max(0, Math.min(100, pct))}% - 12px)`;
+
   const Thumb = ({ pct, which }: { pct: number; which: "low" | "high" }) => (
     <div
       className="absolute flex items-center justify-center cursor-grab active:cursor-grabbing"
       style={{
-        left: `calc(${pct}% - 12px)`,
+        left: thumbLeft(pct),
         top: -9,
         width: 24,
         height: 24,
@@ -104,7 +113,6 @@ function DualRangeSlider({
       }}
       onPointerDown={startDrag(which)}
     >
-      {/* Two vertical white lines (drag indicator) */}
       <div style={{ display: "flex", gap: 3, flexDirection: "row" }}>
         <div style={{ width: 1.8, height: 10.8, background: "rgba(255,255,255,0.6)", borderRadius: 12 }} />
         <div style={{ width: 1.8, height: 10.8, background: "rgba(255,255,255,0.6)", borderRadius: 12 }} />
@@ -254,7 +262,7 @@ function CoverAmountSection({
           ) : (
             <button onClick={() => setEditingMin(true)}>
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: 20, color: "#282828" }}>
-                ₹{minCover} Lakh
+                ₹{minCover.toFixed(1)} Lakh
               </span>
             </button>
           )}
@@ -288,7 +296,7 @@ function CoverAmountSection({
           ) : (
             <button onClick={() => setEditingMax(true)}>
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: 20, color: "#282828" }}>
-                ₹{maxCover} Lakh
+                ₹{maxCover.toFixed(1)} Lakh
               </span>
             </button>
           )}
