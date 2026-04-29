@@ -1395,20 +1395,20 @@ export function PlanDetailScreen({ planId, onBack, onReviewPay }: Props) {
                     {/* File icon */}
                     
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "#282828", lineHeight: "16px" }}>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 14, color: "#282828", lineHeight: "16px" }}>
                         {doc.title}
                       </p>
-                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#7e7e7e", lineHeight: "14px", marginTop: 2 }}>
+                      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight:400, color: "#7e7e7e", lineHeight: "14px", marginTop: 4 }}>
                         {doc.desc}
                       </p>
                     </div>
                   </div>
                   {/* Download icon */}
                   <button style={{ background: "none", border: "none", cursor: "pointer", padding: 0, flexShrink: 0, marginLeft: 8 }}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 3V13M6 9L10 13L14 9" stroke="#282828" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M4 16H16" stroke="#282828" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M20.2764 11.9531C20.6542 11.9917 20.949 12.3112 20.9492 12.6992V18.2998C20.9491 19.8139 19.7134 21.0498 18.1992 21.0498H5.69922C4.18507 21.0498 2.94933 19.8139 2.94922 18.2998V12.6992C2.94942 12.2852 3.28513 11.9492 3.69922 11.9492L3.77637 11.9531C4.15423 11.9917 4.44903 12.3112 4.44922 12.6992V18.2998C4.44933 18.9855 5.0135 19.5498 5.69922 19.5498H18.1992C18.8849 19.5498 19.4491 18.9855 19.4492 18.2998V12.6992C19.4494 12.2852 19.7851 11.9492 20.1992 11.9492L20.2764 11.9531Z" fill="#282828"/>
+<path d="M11.999 2.84961C12.4132 2.84961 12.749 3.1854 12.749 3.59961V13.0889L16.4688 9.36914C16.7616 9.07631 17.2364 9.07644 17.5293 9.36914C17.8222 9.66203 17.8222 10.1368 17.5293 10.4297L12.5293 15.4297C12.2364 15.7226 11.7616 15.7226 11.4688 15.4297L6.46875 10.4297C6.17605 10.1368 6.17593 9.66197 6.46875 9.36914C6.76158 9.07631 7.23639 9.07644 7.5293 9.36914L11.249 13.0889V3.59961C11.249 3.18546 11.5849 2.84971 11.999 2.84961Z" fill="#282828"/>
+</svg>
                   </button>
                 </div>
               ))}
